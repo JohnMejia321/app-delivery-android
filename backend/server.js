@@ -22,7 +22,13 @@ app.disable('x-powered-by');
 app.set('port', port);
 
 
-server.listen(3000,  'localhost', function() {
+/*
+* RUTAS
+*/
+const users = require('./routes/usersRoutes');
+
+
+server.listen(3000,  '192.168.101.72'  , function() {
     console.log('Aplicacion de NodeJS ' + port + ' Iniciada...')
 });
 
@@ -35,6 +41,11 @@ app.get('/test', (req, res) => {
     res.send('Esta es la ruta del TEST')
 });
 
+/*
+* LLAMANDO A LA RUTAS
+*/
+users(app);
+
 
 // ERROR HANDLER
 app.use((err, req, res, next) => {
@@ -43,6 +54,7 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = {
-    app: app
+    app: app,
+    server: server
 }
 
